@@ -1,17 +1,12 @@
 const {Client} = require('pg')
 const express = require('express')
+const fs = require("fs")
 const app = express()
 app.use(express.json())
 app.use('/', express.static('public'))
 
 async function getDbConnection() {
-    const data_connection = {
-        host: '127.0.0.1',
-        port: 5432,
-        database: 'Facturas',
-        user: 'postgres',
-        password: 'nekygo'
-    }
+    const data_connection = JSON.parse(fs.readFileSync('db_config.json'))
 
     const client = new Client(data_connection)
     await client.connect()
