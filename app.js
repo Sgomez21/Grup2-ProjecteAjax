@@ -16,7 +16,7 @@ async function getDbConnection() {
 // app.get('/', function (req, res) {
 //     res.send('Hello World')
 // })
-
+/*
 app.get('/user', function (req, res) {
     res.json({
         firstname: 'Jaimito',
@@ -53,6 +53,10 @@ app.put("/clients/:codCli", async function(req, res){
     console.log(data)
     res.json('ok')
 })
+*/
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + '/public/index.html');
+});
 
 app.listen(3000, 
     () => console.log("listeng in http://localhost:3000"))

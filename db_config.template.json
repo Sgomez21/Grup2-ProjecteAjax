@@ -3,5 +3,5 @@
     "port": "5432",
     "database": "Chinook",
     "user": "postgres",
-    "password": "passworrd"
+    "password": "password"
 }
