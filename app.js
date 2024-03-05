@@ -16,6 +16,7 @@ async function getDbConnection() {
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
+
 //Employee
 app.get('/employee', async function(req, res) {
     try {
