@@ -1,29 +1,27 @@
 fetch('/employee')
-    .then(respone => response.json())
+    .then(response => response.json())
     .then(data => {
-        const tablaempleado = document.querySelector('#employee tbody');
-        tablaempleado.innerHTML = '';
+        const tablaEmpleado = document.querySelector('#example1 thead');
+        const titulos = Object.keys(data[0]); // Obtener los nombres de las propiedades del primer elemento del array
 
-        data.array.forEach(element => {
-            const row = document.createElement('tr');
-            row.innerHTML=`
-            <td>${employee.employee_id}</td>
-            <td>${employee.last_name}</td>
-            <td>${employee.first_name}</td>
-            <td>${employee.title}</td>
-            <td>${employee.reports_to}</td>
-            <td>${employee.birth_date}</td>
-            <td>${employee.hire_date}</td>
-            <td>${employee.address}</td>
-            <td>${employee.city}</td>
-            <td>${employee.state}</td>
-            <td>${employee.country}</td>
-            <td>${employee.postal_code}</td>
-            <td>${employee.phone}</td>
-            <td>${employee.fax}</td>
-            <td>${employee.email}</td>
-            `;
-            tablaempleado.appendChild(row);
+        const row = document.createElement('tr');
+        titulos.forEach(titulo => {
+            const th = document.createElement('th');
+            th.textContent = titulo.toUpperCase().replace('_', ' '); // Añadir el título como texto del th, y convertir el texto en mayúsculas
+            row.appendChild(th);
+        });
+        tablaEmpleado.appendChild(row);
+
+        // Agregar las filas de datos
+        const tablaCuerpo = document.querySelector('#example1 tbody');
+        data.forEach(element => {
+            const fila = document.createElement('tr');
+            titulos.forEach(titulo => {
+                const td = document.createElement('td');
+                td.textContent = element[titulo];
+                fila.appendChild(td);
+            });
+            tablaCuerpo.appendChild(fila);
         });
     })
-    .catch(error => console.error('Error encontrar empleados'))
+    .catch(error => console.error('Error encontrar empleados:', error));

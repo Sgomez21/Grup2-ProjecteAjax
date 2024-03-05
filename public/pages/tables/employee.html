@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Employee</title>
   <link rel="shortcut icon" href="../../dist/img/Logo.png" type="image/x-icon">
-
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -16,6 +15,15 @@
   <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <style>
+    #example1 {
+      font-size: 0.93em;
+    }
+    #example1 th {
+      text-align: center;
+      vertical-align: middle;
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -79,25 +87,25 @@
       <span class="brand-text font-weight-light">Azure Productions</span>
     </a>
 
-       <!-- Sidebar -->
-       <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-          </div>
-          <div class="info">
-            <a href="#" class="d-block">Sergio</a>
-          </div>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
-        <div class="user-panel mt-3 pb-3 d-flex">
-          <div class="image">
-            <img src="../../dist/img/user3-128x128.jpg" class="img-circle elevation-2" alt="User Image">
-          </div>
-          <div class="info">
-            <a href="#" class="d-block">Esther Rosa</a>
-          </div>
+        <div class="info">
+          <a href="#" class="d-block">Sergio</a>
         </div>
+      </div>
+      <div class="user-panel mt-3 pb-3 d-flex">
+        <div class="image">
+          <img src="../../dist/img/user3-128x128.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Esther Rosa</a>
+        </div>
+      </div>
 
       <!-- SidebarSearch Form -->
       <div class="form-inline">
@@ -179,8 +187,11 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="employee" class="table table-bordered table-striped">
-                  
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  </thead>
+                  <tbody>
+                  </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
@@ -237,7 +248,9 @@
 <script>
   $(function () {
     $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
@@ -250,7 +263,6 @@
       "responsive": true,
     });
   });
-  
 </script>
 </body>
 </html>
