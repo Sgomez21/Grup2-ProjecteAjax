@@ -12,6 +12,30 @@ async function getDbConnection() {
     await client.connect()
     return client;
 }
+//Index
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + '/public/index.html');
+});
+//Employee
+app.get('/employee', async function(req, res) {
+    try {
+        let db = await getDbConnection();
+        const query = await db.query('SELECT * FROM employee;');
+        res.json(query.rows);
+        await db.end();
+    } catch (error) {
+        console.error('Error fetching employees:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
+app.listen(3000, function() {
+    console.log("Listening on http://localhost:3000");
+});
+
+
+
 
 // app.get('/', function (req, res) {
 //     res.send('Hello World')
@@ -54,9 +78,3 @@ app.put("/clients/:codCli", async function(req, res){
     res.json('ok')
 })
 */
-app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/public/index.html');
-});
-
-app.listen(3000, 
-    () => console.log("listeng in http://localhost:3000"))
