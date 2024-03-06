@@ -34,7 +34,7 @@ app.get('/employee', async function(req, res) {
 app.get('/track', async function(req, res) {
     try {
         let db = await getDbConnection();
-        const query = await db.query('SELECT * FROM track;');
+        const query = await db.query("SELECT track.track_id, track.name, album.title as album, media_type.name as media, genre.name as genre, track.composer, track.milliseconds, track.bytes, track.unit_price FROM track INNER JOIN album ON track.album_id = album.album_id INNER JOIN media_type ON track.media_type_id = media_type.media_type_id INNER JOIN genre ON track.genre_id = genre.genre_id;");
         res.json(query.rows);
         await db.end();
     } catch (error) {
