@@ -23,5 +23,9 @@ fetch('/track')
             });
             tablaCuerpo.appendChild(fila);
         });
+
+        document.getElementById('button_add').addEventListener('click', function() {
+            $('#employeeModal').modal('show');
+        });
     })
     .catch(error => console.error('Error encontrar las bandas:', error));
