@@ -26,11 +26,52 @@
       text-align: center;
       vertical-align: middle;
     }
-    #button_add{
+
+    #button_add {
       margin: 1%;
     }
-    #title{
+
+    #title {
       width: 81%;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      position: absolute;
+      top: -1.5rem;
+      left: 0;
+      color: #999;
+      font-size: 0.8rem;
+      transition: all 0.2s ease;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .form-control:focus+label,
+    .form-control:not(:placeholder-shown)+label {
+      top: -2.5rem;
+      font-size: 0.8rem;
+      color: #333;
+    }
+
+    .form-group label {
+      position: absolute;
+      top: -1.5rem;
+      left: 0;
+      color: #999;
+      font-size: 0.8rem;
+      font-weight: normal !important;
+      transition: all 0.2s ease;
     }
   </style>
 </head>
@@ -198,7 +239,8 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <button id="button_add" type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add
+                  <button id="button_add" type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i>
+                    Add
                     employee</button>
                   <div class="card-body">
 
@@ -222,16 +264,28 @@
                           </div>
                           <div class="modal-body">
                             <form id="employeeForm">
-                              <input type="text" id="firstName" placeholder="First Name">
-                              <input type="text" id="lastName" placeholder="Last Name"><br><br>
-                              <input type="text" id="title" placeholder="Title"><br><br>
-                              <input type="text" id="reports_to" placeholder="reports_to"><br><br>
+                              <label for="firstName/LastName">First Name / Last Name</label><br>
+                              <input type="text" id="lastName" placeholder="ex: Andrew">
+                              <input type="text" id="firstName" placeholder="ex: Adams"><br>
+                              <label for="Title">Title</label><br>
+                              <input type="text" id="title" placeholder="Title"><br>
+                              <label for="reports_to">Reports_to</label><br>
+                              <input type="text" id="reports_to" placeholder="reports_to"><br>
+                              <label for="birth_hire_date">Birth Date / Hire Date</label><br>
                               <input type="date" id="birth_date">
-                              <input type="date" id="hire_date"><br><br>
+                              <input type="date" id="hire_date"><br>
+                              <label for="adress/city">Address / City</label><br>
                               <input type="text" id="address" placeholder="Address">
-                              <input type="text" id="city" placeholder="City">
-
-
+                              <input type="text" id="city" placeholder="City"><br>
+                              <label for="state/country">State / Country</label><br>
+                              <input type="text" id="state" placeholder="State">
+                              <input type="text" id="country" placeholder="Country"><br>
+                              <label for="postalcode/phone">Postal Code / Phone</label><br>
+                              <input type="text" id="postal_code" placeholder="Postal Code">
+                              <input type="text" id="phone" placeholder="Phone"><br>
+                              <label for="fax/email">Fax / Email</label><br>
+                              <input type="text" id="fax" placeholder="Fax">
+                              <input type="email" id="email" placeholder="Email">
                             </form>
                           </div>
                           <div class="modal-footer">
