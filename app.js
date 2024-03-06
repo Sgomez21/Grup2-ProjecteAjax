@@ -21,7 +21,7 @@ app.get('/', function(req, res) {
 app.get('/employee', async function(req, res) {
     try {
         let db = await getDbConnection();
-        const query = await db.query('SELECT * FROM employee;');
+        const query = await db.query("SELECT e1.employee_id, e1.last_name, e1.first_name, e1.title, CONCAT(e2.last_name, ' ',e2.first_name ) AS reports_to, e1.birth_date, e1.hire_date, e1.address, e1.city, e1.state, e1.country, e1.postal_code, e1.phone, e1.fax, e1.email FROM employee e1 LEFT JOIN employee e2 ON e1.reports_to = e2.employee_id;;");
         res.json(query.rows);
         await db.end();
     } catch (error) {
