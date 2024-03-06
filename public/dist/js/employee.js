@@ -25,3 +25,9 @@ fetch('/employee')
         });
     })
     .catch(error => console.error('Error encontrar empleados:', error));
+
+    document.getElementById('button_add').addEventListener('click', function() {
+        $('#employeeModal').modal('show');
+    });
+    
+    
