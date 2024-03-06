@@ -43,7 +43,18 @@ app.get('/track', async function(req, res) {
     }
 });
 
-
+//invoice
+app.get('/invoice', async function(req, res) {
+    try {
+        let db = await getDbConnection();
+        const query = await db.query('SELECT * FROM invoice;');
+        res.json(query.rows);
+        await db.end();
+    } catch (error) {
+        console.error('Error fetching invoice:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 app.listen(3000, function() {
     console.log("Listening on http://localhost:3000");
