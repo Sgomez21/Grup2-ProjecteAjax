@@ -29,3 +29,42 @@ fetch('/track')
         });
     })
     .catch(error => console.error('Error encontrar las bandas:', error));
+
+
+    function openModal() {
+        document.getElementById('button_edit').addEventListener('click', function() {
+            $('#editModal').modal('show');
+        })        
+    }
+
+    function searchData() {
+        let track_id = document.getElementById('trackIdInput').value;
+
+        if (track_id == " ") {
+            alert('Please insert an id');
+            return;
+        }
+
+        fetch(`/track/${track_id}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+          // Actualizar los valores en el modal con los datos del track
+          document.getElementById('name').value = data[0].name;
+          document.getElementById('album').value = data[0].album;
+          document.getElementById('media').value = data[0].media;
+          document.getElementById('genre').value = data[0].genre;
+          document.getElementById('composer').value = data[0].composer;
+          document.getElementById('milliseconds').value = data[0].milliseconds;
+          document.getElementById('byte').value = data[0].bytes;
+          document.getElementById('unite_price').value = data[0].unit_price;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          console.log("No ha funcionado")
+        });
+    }
