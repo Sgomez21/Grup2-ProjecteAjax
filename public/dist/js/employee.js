@@ -31,6 +31,10 @@ document.getElementById('button_add').addEventListener('click', function () {
     $('#employeeModal').modal('show');
 });
 
+document.getElementById('button_edit').addEventListener('click', function () {
+    $('#employeeModalEdit').modal('show');
+});
+
 function saveEmployee() {
     const id = document.getElementById('id').value;
     const lastName = document.getElementById('lastName').value;
