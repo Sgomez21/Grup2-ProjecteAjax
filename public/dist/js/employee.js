@@ -23,11 +23,64 @@ fetch('/employee')
             });
             tablaCuerpo.appendChild(fila);
         });
+        
     })
     .catch(error => console.error('Error encontrar empleados:', error));
 
-    document.getElementById('button_add').addEventListener('click', function() {
-        $('#employeeModal').modal('show');
-    });
-    
-    
+document.getElementById('button_add').addEventListener('click', function () {
+    $('#employeeModal').modal('show');
+});
+
+function saveEmployee() {
+    const id = document.getElementById('id').value;
+    const lastName = document.getElementById('lastName').value;
+    const firstName = document.getElementById('firstName').value;
+    const title = document.getElementById('title').value;
+    const reports_to = document.getElementById('reports_to').value;
+    const birth_date = document.getElementById('birth_date').value;
+    const hire_date = document.getElementById('hire_date').value;
+    const address = document.getElementById('address').value;
+    const city = document.getElementById('city').value;
+    const state = document.getElementById('state').value;
+    const country = document.getElementById('country').value;
+    const postal_code = document.getElementById('postal_code').value;
+    const phone = document.getElementById('phone').value;
+    const fax = document.getElementById('fax').value;
+    const email = document.getElementById('email').value;
+
+    const data = {
+        id,
+        lastName,
+        firstName,
+        title,
+        reports_to,
+        birth_date,
+        hire_date,
+        address,
+        city,
+        state,
+        country,
+        postal_code,
+        phone,
+        fax,
+        email
+    };
+
+    fetch('/employee', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message != undefined) {
+                console.log('Success:', data);
+                alert('The user has been added successfully');
+            } else {
+                console.error('Error:', data.error);
+                alert("The user could not be added");
+            }
+        })
+}
