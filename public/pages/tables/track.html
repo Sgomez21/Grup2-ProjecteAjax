@@ -33,6 +33,13 @@
     #button_delete {
       margin: 1%;
     }
+    #botonbuscar{
+      margin-left: 2%;
+      margin-bottom: 1%;
+    }
+    .tamano_input{
+      width: 81%;
+    }
   </style>
 </head>
 
@@ -223,17 +230,17 @@
                        <div class="modal-body">
                          <form id="trackForm">
                             <label>ID</label><br>
-                            <input type="text" name="add_id" id="id" placeholder="Exemple: 1"><br>
+                            <input type="text" name="add_id" id="add_id" placeholder="Exemple: 1"><br>
                             <label>Name</label><br>
-                            <input type="text" id="add_name" placeholder="Name"><br>
+                            <input class="tamano_input" type="text" id="add_name" placeholder="Name"><br>
                             <label>Album</label><br>
-                            <input type="text" id="add_album" placeholder="Name Album"><br>
+                            <input class="tamano_input" type="text" id="add_album" placeholder="Name Album"><br>
                             <label>Media</label><br>
                             <input type="text" id="add_media" placeholder="Name Media"><br>
                             <label>Genre</label><br>
                             <input type="text" id="add_genre" placeholder="Name Genre"><br>
                             <label>Composer</label><br>
-                            <input type="text" id="add_composer" placeholder="Name Composer"><br>
+                            <input class="tamano_input" type="text" id="add_composer" placeholder="Name Composer"><br>
                             <label>Duration in Milliseconds / Size in Byte</label><br>
                             <input type="number" id="add_milliseconds">
                             <input type="number" id="add_byte"><br>
@@ -262,17 +269,17 @@
                      <div class="modal-body">
                        <form id="editTrackForm">
                           <label>Id</label><br>
-                          <input type="text" id="trackIdInput" placeholder="Id"><button type="button" class="btn btn-primary" onclick="searchData()"><i class="fas fa-search"></i> Search ID</button><br>
+                          <input type="text" id="trackIdInput" placeholder="Id"><button id="botonbuscar" type="button" class="btn btn-primary" onclick="searchData()"><i class="fas fa-search"></i> Search ID</button><br>
                           <label>Name</label><br>
-                          <input type="text" id="edit_name"><br>
+                          <input class="tamano_input" type="text" id="edit_name"><br>
                           <label>Album</label><br>
-                          <input type="text" id="edit_album"><br>
+                          <input class="tamano_input" type="text" id="edit_album"><br>
                           <label>Media</label><br>
                           <input type="text" id="edit_media"><br>
                           <label>Genre</label><br>
                           <input type="text" id="edit_genre"><br>
                           <label>Composer</label><br>
-                          <input type="text" id="edit_composer"><br>
+                          <input class="tamano_input" type="text" id="edit_composer"><br>
                           <label>Duration in Milliseconds / Size in Byte</label><br>
                           <input type="number" id="edit_milliseconds">
                           <input type="number" id="edit_byte"><br>

@@ -30,6 +30,8 @@ document.getElementById('button_add').addEventListener('click', function () {
     $('#trackModal').modal('show');
 })
 
+// ------------------------------------------------------------Añadir------------------------------------------------------------
+
 function saveTrack() {
     const id = document.getElementById('add_id').value;
     const name = document.getElementById('add_name').value;

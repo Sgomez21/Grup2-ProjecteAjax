@@ -87,7 +87,7 @@ app.post("/track", async function (req, res) {
             byte,
             unite_price
         } = req.body;
-        const query = await db.query("INSERT INTO employee(track_id, name, title, name, reports_to, birth_date, hire_date, address, city, state, country, postal_code, phone, fax, email) values($1, $2, $3, $4, $5, $6, $7, $8, $9)", [id,name, album, media, genre, composer, milliseconds, byte, unite_price]);
+        const query = await db.query("INSERT INTO track(id, name, album, media, genre, composer, milliseconds, byte, unite_price) values($1, $2, $3, $4, $5, $6, $7, $8, $9)", [id,name, album, media, genre, composer, milliseconds, byte, unite_price]);
         res.json({message: 'Track added successfully'})
         await db.end();
     } catch (error) {
