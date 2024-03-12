@@ -77,7 +77,8 @@
       font-weight: normal !important;
       transition: all 0.2s ease;
     }
-    #botonbuscar{
+
+    #botonbuscar {
       margin-left: 2%;
       margin-bottom: 1%;
     }
@@ -250,8 +251,6 @@
                   <button id="button_add" type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i>
                     Add
                     employee</button>
-                  <button id="button_edit" type="button" class="btn btn-primary float-right"><i class="fas fa-edit"></i>
-                    Edit employee</button>
                   <div class="card-body">
 
                     <table id="example1" class="table table-bordered table-striped">
@@ -281,8 +280,9 @@
                               <input type="text" id="firstName" placeholder="ex: Adams"><br>
                               <label for="Title">Title</label><br>
                               <input type="text" id="title" placeholder="Title"><br>
-                              <label for="reports_to">Reports_to</label><br>
-                              <input type="text" id="reports_to" placeholder="reports_to"><br>
+                              <div id="reportsToOptions" style="display: none;"></div>
+                              <label for="reports_to">Reports To</label><br>
+                              <select id="reports_to"></select><br>
                               <label for="birth_hire_date">Birth Date / Hire Date</label><br>
                               <input type="date" id="birth_date">
                               <input type="date" id="hire_date"><br>
@@ -322,7 +322,9 @@
                           <div class="modal-body">
                             <form id="employeeForm">
                               <label for="id">ID</label><br>
-                              <input type="text" id="trackIdInput" placeholder="Id"><button id="botonbuscar" type="button" class="btn btn-primary" onclick="searchData()"><i class="fas fa-search"></i> Search ID</button><br>
+                              <input type="text" id="employeeIdInput" placeholder="Id"><button id="botonbuscar"
+                                type="button" class="btn btn-primary" onclick="searchData()"><i
+                                  class="fas fa-search"></i> Search ID</button><br>
                               <label for="firstName/LastName">First Name / Last Name</label><br>
                               <input type="text" id="lastName" placeholder="ex: Andrew">
                               <input type="text" id="firstName" placeholder="ex: Adams"><br>
@@ -389,42 +391,12 @@
   <!-- Bootstrap 4 -->
   <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- DataTables  & Plugins -->
-  <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-  <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-  <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-  <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-  <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-  <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-  <script src="../../plugins/jszip/jszip.min.js"></script>
-  <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
-  <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
-  <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-  <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-  <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
   <script src="../../dist/js/employee.js"></script>
   <!-- AdminLTE App -->
   <script src="../../dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="../../dist/js/demo.js"></script>
   <!-- Page specific script -->
-  <script>
-    $(function () {
-      $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-      $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-      });
-    });
-
-  </script>
 </body>
 
 </html>

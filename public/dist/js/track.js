@@ -26,6 +26,45 @@ fetch('/track')
     })
     .catch(error => console.error('Error encontrar las bandas:', error));
 
+fetch('/album')
+    .then(response => response.json())
+    .then(albumData => {
+        const selectAlbum = document.getElementById('add_album');
+        albumData.forEach(album => {
+            const option = document.createElement('option');
+            option.textContent = album.title;
+            option.value = album.album_id;
+            selectAlbum.appendChild(option);
+        });
+    })
+    .catch(error => console.error('Error obteniendo datos de álbumes:', error));
+
+fetch('/media_type')
+    .then(response => response.json())
+    .then(mediaData => {
+        const selectmedia = document.getElementById('add_media');
+        mediaData.forEach(media => {
+            const option = document.createElement('option');
+            option.textContent = media.name;
+            option.value = media.media_type_id;
+            selectmedia.appendChild(option);
+        });
+    })
+    .catch(error => console.error('Error obteniendo datos de media:', error));
+
+fetch('/genre')
+    .then(response => response.json())
+    .then(genreData => {
+        const selectgenre = document.getElementById('add_genre');
+        genreData.forEach(genre => {
+            const option = document.createElement('option');
+            option.textContent = genre.name;
+            option.value = genre.genre_id;
+            selectgenre.appendChild(option);
+        });
+    })
+    .catch(error => console.error('Error obteniendo datos de genre:', error));
+
 document.getElementById('button_add').addEventListener('click', function () {
     $('#trackModal').modal('show');
 })
@@ -75,7 +114,7 @@ function saveTrack() {
 }
 // ------------------------------------------------------------Editar------------------------------------------------------------
 
-document.getElementById('button_edit').addEventListener('click', function() {
+document.getElementById('button_edit').addEventListener('click', function () {
     $('#editModal').modal('show');
 });
 

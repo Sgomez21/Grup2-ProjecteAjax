@@ -23,7 +23,14 @@ fetch('/employee')
             });
             tablaCuerpo.appendChild(fila);
         });
-        
+        const selectReportsTo = document.getElementById('reports_to');
+        const jefes = data.filter(employee => employee.title !== 'Sales Rep');
+        jefes.forEach(jefe => {
+            const option = document.createElement('option');
+            option.textContent = `${jefe.first_name} ${jefe.last_name}`;
+            option.value = jefe.employee_id;
+            selectReportsTo.appendChild(option);
+        });
     })
     .catch(error => console.error('Error encontrar empleados:', error));
 
@@ -42,7 +49,8 @@ function saveEmployee() {
     const title = document.getElementById('title').value;
     const reports_to = document.getElementById('reports_to').value;
     const birth_date = document.getElementById('birth_date').value;
-    const hire_date = document.getElementById('hire_date').value;
+    let hire_date = document.getElementById('hire_date').value;
+    hire_date = hire_date == '' ? null : hire_date;
     const address = document.getElementById('address').value;
     const city = document.getElementById('city').value;
     const state = document.getElementById('state').value;
