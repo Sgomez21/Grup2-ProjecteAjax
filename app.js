@@ -71,6 +71,41 @@ app.get('/track', async function(req, res) {
     }
 });
 
+
+//ADD
+app.post("/track", async function (req, res) {
+    try {
+        let db = await getDbConnection();
+        const {
+            id,
+            name,
+            album,
+            media,
+            genre,
+            composer,
+            milliseconds,
+            byte,
+            unite_price
+        } = req.body;
+        const query = await db.query("INSERT INTO employee(track_id, name, title, name, reports_to, birth_date, hire_date, address, city, state, country, postal_code, phone, fax, email) values($1, $2, $3, $4, $5, $6, $7, $8, $9)", [id,name, album, media, genre, composer, milliseconds, byte, unite_price]);
+        res.json({message: 'Track added successfully'})
+        await db.end();
+    } catch (error) {
+        console.error('Error adding track:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
+
+//EDIT
+app.get('/track/:track_id', async function (req, res) {
+    let track_id = parseInt(req.params.track_id)
+    let db = await getDbConnection()
+    const query = await db.query('SELECT track.track_id, track.name, album.title as album, media_type.name as media, genre.name as genre, track.composer, track.milliseconds, track.bytes, track.unit_price FROM track INNER JOIN album ON track.album_id = album.album_id INNER JOIN media_type ON track.media_type_id = media_type.media_type_id INNER JOIN genre ON track.genre_id = genre.genre_id where track.track_id = $1;', [track_id])
+    res.json(query.rows)
+    await db.end()
+})
+
+
 //invoice
 app.get('/invoice', async function(req, res) {
     try {
@@ -83,6 +118,7 @@ app.get('/invoice', async function(req, res) {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
 
 app.listen(3000, function() {
     console.log("Listening on http://localhost:3000");

@@ -23,29 +23,69 @@ fetch('/track')
             });
             tablaCuerpo.appendChild(fila);
         });
-
-        document.getElementById('button_add').addEventListener('click', function() {
-            $('#employeeModal').modal('show');
-        });
     })
     .catch(error => console.error('Error encontrar las bandas:', error));
 
+document.getElementById('button_add').addEventListener('click', function () {
+    $('#trackModal').modal('show');
+})
 
-    function openModal() {
-        document.getElementById('button_edit').addEventListener('click', function() {
-            $('#editModal').modal('show');
-        })        
+function saveTrack() {
+    const id = document.getElementById('add_id').value;
+    const name = document.getElementById('add_name').value;
+    const album = document.getElementById('add_album').value;
+    const media = document.getElementById('add_media').value;
+    const genre = document.getElementById('add_genre').value;
+    const composer = document.getElementById('add_composer').value;
+    const milliseconds = document.getElementById('add_milliseconds').value;
+    const byte = document.getElementById('add_byte').value;
+    const unite_price = document.getElementById('add_unite_price').value;
+
+    const data = {
+        id,
+        name,
+        album,
+        media,
+        genre,
+        composer,
+        milliseconds,
+        byte,
+        unite_price
+    };
+
+    fetch('/track', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message != undefined) {
+                console.log('Success:', data);
+                alert('The user has been added successfully');
+            } else {
+                console.error('Error:', data.error);
+                alert("The user could not be added");
+            }
+        })
+}
+// ------------------------------------------------------------Editar------------------------------------------------------------
+
+document.getElementById('button_edit').addEventListener('click', function() {
+    $('#editModal').modal('show');
+});
+
+function searchData() {
+    let track_id = document.getElementById('trackIdInput').value.trim();
+
+    if (track_id === "") {
+        alert('Please insert an ID');
+        return;
     }
 
-    function searchData() {
-        let track_id = document.getElementById('trackIdInput').value;
-
-        if (track_id == " ") {
-            alert('Please insert an id');
-            return;
-        }
-
-        fetch(`/track/${track_id}`)
+    fetch(`/track/${track_id}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -53,18 +93,25 @@ fetch('/track')
             return response.json();
         })
         .then(data => {
-          // Actualizar los valores en el modal con los datos del track
-          document.getElementById('name').value = data[0].name;
-          document.getElementById('album').value = data[0].album;
-          document.getElementById('media').value = data[0].media;
-          document.getElementById('genre').value = data[0].genre;
-          document.getElementById('composer').value = data[0].composer;
-          document.getElementById('milliseconds').value = data[0].milliseconds;
-          document.getElementById('byte').value = data[0].bytes;
-          document.getElementById('unite_price').value = data[0].unit_price;
+            if (data.length > 0) {
+                // Actualizar los valores en el modal con los datos del track
+                document.getElementById('edit_name').value = data[0].name;
+                document.getElementById('edit_album').value = data[0].album;
+                document.getElementById('edit_media').value = data[0].media;
+                document.getElementById('edit_genre').value = data[0].genre;
+                document.getElementById('edit_composer').value = data[0].composer;
+                document.getElementById('edit_milliseconds').value = data[0].milliseconds;
+                document.getElementById('edit_byte').value = data[0].bytes;
+                document.getElementById('edit_unite_price').value = data[0].unit_price;
+
+                // Muestra el modal después de cargar los datos
+                $('#editModal').modal('show');
+            } else {
+                alert('No data found for the provided ID.');
+            }
         })
         .catch(error => {
-          console.error('Error:', error);
-          console.log("No ha funcionado")
+            console.error('Error:', error);
+            alert("Error fetching data. Please try again.");
         });
-    }
+}

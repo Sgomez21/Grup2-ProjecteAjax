@@ -199,9 +199,9 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body" style="overflow: scroll;">
-                  <button id="button_add" type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add employee</button>
-                  <button id="button_edit" type="button" class="btn btn-primary float-right" onclick="openModal()"><i class="fas fa-edit"></i> Edit employee</button>
-                  <button id="button_delete" type="button" class="btn btn-primary float-right"><i class="fas fa-trash"></i> Delete employee</button>
+                  <button id="button_add" type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add Track</button>
+                  <button id="button_edit" type="button" class="btn btn-primary float-right"><i class="fas fa-edit"></i> Edit Track</button>
+                  <button id="button_delete" type="button" class="btn btn-primary float-right"><i class="fas fa-trash"></i> Delete Track</button>
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     </thead>
@@ -209,8 +209,8 @@
                     </tbody>
                   </table>
 
-                   <!-- Modal -->
-                  <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                   <!-- Modal Add-->
+                  <div class="modal fade" id="trackModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                    aria-hidden="true">
                    <div class="modal-dialog">
                      <div class="modal-content">
@@ -221,34 +221,36 @@
                          </button>
                        </div>
                        <div class="modal-body">
-                         <form id="employeeForm">
+                         <form id="trackForm">
+                            <label>ID</label><br>
+                            <input type="text" name="add_id" id="id" placeholder="Exemple: 1"><br>
                             <label>Name</label><br>
-                            <input type="text" id="name" placeholder="Name"><br>
+                            <input type="text" id="add_name" placeholder="Name"><br>
                             <label>Album</label><br>
-                            <input type="text" id="album" placeholder="Name Album"><br>
+                            <input type="text" id="add_album" placeholder="Name Album"><br>
                             <label>Media</label><br>
-                            <input type="text" id="media" placeholder="Name Media"><br>
+                            <input type="text" id="add_media" placeholder="Name Media"><br>
                             <label>Genre</label><br>
-                            <input type="text" id="genre" placeholder="Name Genre"><br>
+                            <input type="text" id="add_genre" placeholder="Name Genre"><br>
                             <label>Composer</label><br>
-                            <input type="text" id="composer" placeholder="Name Composer"><br>
+                            <input type="text" id="add_composer" placeholder="Name Composer"><br>
                             <label>Duration in Milliseconds / Size in Byte</label><br>
-                            <input type="number" id="milliseconds">
-                            <input type="number" id="byte"><br>
+                            <input type="number" id="add_milliseconds">
+                            <input type="number" id="add_byte"><br>
                             <label>Unite Price</label><br>
-                            <input type="text" id="unite_price" placeholder="Unite price, ej:'1.12'">
+                            <input type="text" id="add_unite_price" placeholder="Unite price, ej:'1.12'">
                          </form>
                        </div>
                        <div class="modal-footer">
                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                         <button type="button" class="btn btn-primary" onclick="saveEmployee()">Save changes</button>
+                         <button type="button" class="btn btn-primary" onclick="saveTrack()">Save changes</button>
                        </div>
                      </div>
                    </div>
                  </div>
 
-                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
+                <!-- Modal Edit-->
+                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                  <div class="modal-dialog">
                    <div class="modal-content">
                      <div class="modal-header">
@@ -258,29 +260,29 @@
                        </button>
                      </div>
                      <div class="modal-body">
-                       <form id="employeeForm">
+                       <form id="editTrackForm">
                           <label>Id</label><br>
-                          <input type="text" id="trackIdInput" placeholder="Id"><button type="button" class="btn btn-primary" onclick="searchData()"><i class="fas fa-search"></i>Search ID</button><br>
+                          <input type="text" id="trackIdInput" placeholder="Id"><button type="button" class="btn btn-primary" onclick="searchData()"><i class="fas fa-search"></i> Search ID</button><br>
                           <label>Name</label><br>
-                          <input type="text" id="name"><br>
+                          <input type="text" id="edit_name"><br>
                           <label>Album</label><br>
-                          <input type="text" id="album"><br>
+                          <input type="text" id="edit_album"><br>
                           <label>Media</label><br>
-                          <input type="text" id="media"><br>
+                          <input type="text" id="edit_media"><br>
                           <label>Genre</label><br>
-                          <input type="text" id="genre"><br>
+                          <input type="text" id="edit_genre"><br>
                           <label>Composer</label><br>
-                          <input type="text" id="composer"><br>
+                          <input type="text" id="edit_composer"><br>
                           <label>Duration in Milliseconds / Size in Byte</label><br>
-                          <input type="number" id="milliseconds">
-                          <input type="number" id="byte"><br>
+                          <input type="number" id="edit_milliseconds">
+                          <input type="number" id="edit_byte"><br>
                           <label>Unite Price</label><br>
-                          <input type="text" id="unite_price">
+                          <input type="text" id="edit_unite_price">
                        </form>
                      </div>
                      <div class="modal-footer">
                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                       <button type="button" class="btn btn-primary" onclick="saveEmployee()">Save changes</button>
+                       <button type="button" class="btn btn-primary" onclick="saveTrack()">Save changes</button>
                      </div>
                    </div>
                  </div>
