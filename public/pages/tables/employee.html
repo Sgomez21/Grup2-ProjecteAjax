@@ -30,7 +30,9 @@
     #button_add {
       margin: 1%;
     }
-
+    #button_edit {
+      margin: 1%;
+    }
     #title {
       width: 81%;
     }
@@ -242,6 +244,8 @@
                   <button id="button_add" type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i>
                     Add
                     employee</button>
+                  <button id="button_edit" type="button" class="btn btn-primary float-right"><i class="fas fa-edit"></i>
+                    Edit employee</button>
                   <div class="card-body">
 
                     <table id="example1" class="table table-bordered table-striped">
@@ -264,6 +268,8 @@
                           </div>
                           <div class="modal-body">
                             <form id="employeeForm">
+                              <label for="id">ID</label><br>
+                              <input type="text" id="id" placeholder="ex: 9"><br><br>
                               <label for="firstName/LastName">First Name / Last Name</label><br>
                               <input type="text" id="lastName" placeholder="ex: Andrew">
                               <input type="text" id="firstName" placeholder="ex: Adams"><br>
@@ -295,6 +301,53 @@
                         </div>
                       </div>
                     </div>
+
+                          <!-- Modal Edit -->
+                          <div class="modal fade" id="employeeModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel"
+                          aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Add Employee</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form id="employeeForm">
+                                  <label for="id">ID</label><br>
+                                  <input type="text" id="id" placeholder="Hola"><br><br>
+                                  <label for="firstName/LastName">First Name / Last Name</label><br>
+                                  <input type="text" id="lastName" placeholder="ex: Andrew">
+                                  <input type="text" id="firstName" placeholder="ex: Adams"><br>
+                                  <label for="Title">Title</label><br>
+                                  <input type="text" id="title" placeholder="Title"><br>
+                                  <label for="reports_to">Reports_to</label><br>
+                                  <input type="text" id="reports_to" placeholder="reports_to"><br>
+                                  <label for="birth_hire_date">Birth Date / Hire Date</label><br>
+                                  <input type="date" id="birth_date">
+                                  <input type="date" id="hire_date"><br>
+                                  <label for="adress/city">Address / City</label><br>
+                                  <input type="text" id="address" placeholder="Address">
+                                  <input type="text" id="city" placeholder="City"><br>
+                                  <label for="state/country">State / Country</label><br>
+                                  <input type="text" id="state" placeholder="State">
+                                  <input type="text" id="country" placeholder="Country"><br>
+                                  <label for="postalcode/phone">Postal Code / Phone</label><br>
+                                  <input type="text" id="postal_code" placeholder="Postal Code">
+                                  <input type="text" id="phone" placeholder="Phone"><br>
+                                  <label for="fax/email">Fax / Email</label><br>
+                                  <input type="text" id="fax" placeholder="Fax">
+                                  <input type="email" id="email" placeholder="Email">
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="saveEmployee()">Save changes</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
 
                   </div>
                   <!-- /.card-body -->
