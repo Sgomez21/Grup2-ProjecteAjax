@@ -29,7 +29,21 @@ app.get('/employee', async function (req, res) {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+//Employee pillar por id
+app.get('/employee/:id', async function (req, res) {
+    const id = req.params.id;
+    try {
+        let db = await getDbConnection();
+        const query = await db.query("SELECT e1.employee_id, e1.last_name, e1.first_name, e1.title, e1.reports_to, e1.birth_date, e1.hire_date, e1.address, e1.city, e1.state, e1.country, e1.postal_code, e1.phone, e1.fax, e1.email FROM employee e1 LEFT JOIN employee e2 ON e1.reports_to = e2.employee_id WHERE e1.employee_id = $1;", [id]);
+        res.json(query.rows);
+        await db.end();
+    } catch (error) {
+        console.error('Error fetching employee:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
+//Employee añadir
 app.post("/employee", async function (req, res) {
     try {
         let db = await getDbConnection();
@@ -58,6 +72,49 @@ app.post("/employee", async function (req, res) {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 })
+//Employee borrar mediante id
+app.delete('/employee/:id', async function (req, res) {
+    const { id } = req.params;
+    try {
+        let db = await getDbConnection();
+        const query = await db.query("DELETE FROM employee where employee_id = $1", [id]);
+        res.json(query.rows);
+        await db.end();
+    } catch (error) {
+        console.error('Error delete employees:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+//Employee editar por id
+app.put('/employee/:id', async function (req, res) {
+    const id = req.params.id;
+    try {
+        let db = await getDbConnection();
+        const {
+            lastName,
+            firstName,
+            title,
+            reports_to,
+            birth_date,
+            hire_date,
+            address,
+            city,
+            state,
+            country,
+            postal_code,
+            phone,
+            fax,
+            email
+        } = req.body;
+        const query = await db.query("UPDATE employee SET last_name = $1, first_name = $2, title = $3, reports_to = $4, birth_date = $5, hire_date = $6, address = $7, city = $8, state = $9, country = $10, postal_code = $11, phone = $12, fax = $13, email = $14 WHERE employee_id = $15", [lastName, firstName, title, reports_to, birth_date, hire_date, address, city, state, country, postal_code, phone, fax, email, id]);
+        res.json({ message: 'Employee updated successfully' });
+        await db.end();
+    } catch (error) {
+        console.error('Error updating employee:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 //track
 app.get('/track', async function (req, res) {
     try {
