@@ -251,6 +251,7 @@
                             <input class="tamano_input" type="text" id="add_composer" placeholder="Name Composer"><br>
                             <label>Duration in Milliseconds / Size in Byte</label><br>
                             <input type="number" id="add_milliseconds">
+                            <label for="number">Byte</label>
                             <input type="number" id="add_byte"><br>
                             <label>Unite Price</label><br>
                             <input type="text" id="add_unite_price" placeholder="Unite price, ej:'1.12'">
@@ -278,9 +279,7 @@
                         <div class="modal-body">
                           <form id="editTrackForm">
                             <label>Id</label><br>
-                            <input type="text" id="trackIdInput" placeholder="Id"><button id="botonbuscar" type="button"
-                              class="btn btn-primary" onclick="searchData()"><i class="fas fa-search"></i> Search
-                              ID</button><br>
+                            <input class="tamano_input" type="text" id="edit_id"><br>
                             <label>Name</label><br>
                             <input class="tamano_input" type="text" id="edit_name"><br>
                             <label>Album</label><br>
@@ -301,6 +300,46 @@
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                           <button type="button" class="btn btn-primary" onclick="saveTrack()">Save changes</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Modal Delete-->
+                  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Delete Track</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form id="deleteTrackForm">
+                            <label>Id</label><br>
+                            <input class="tamano_input" type="text" id="delete_id"><br>
+                            <label>Name</label><br>
+                            <input class="tamano_input" type="text" id="delete_name"><br>
+                            <label>Album</label><br>
+                            <input class="tamano_input" type="text" id="delete_album"><br>
+                            <label>Media</label><br>
+                            <input type="text" id="delete_media"><br>
+                            <label>Genre</label><br>
+                            <input type="text" id="delete_genre"><br>
+                            <label>Composer</label><br>
+                            <input class="tamano_input" type="text" id="delete_composer"><br>
+                            <label>Duration in Milliseconds / Size in Byte</label><br>
+                            <input type="number" id="delete_milliseconds">
+                            <input type="number" id="delete_byte"><br>
+                            <label>Unite Price</label><br>
+                            <input type="text" id="delete_unite_price">
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" onclick="DeleteTrack()">Delete</button>
                         </div>
                       </div>
                     </div>

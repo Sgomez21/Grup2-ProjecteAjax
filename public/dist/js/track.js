@@ -1,16 +1,15 @@
 fetch('/track')
     .then(response => response.json())
     .then(data => {
-        const tablaEmpleado = document.querySelector('#example1 thead');
-        const titulos = Object.keys(data[0]); // Obtener los nombres de las propiedades del primer elemento del array
-
+        const tablaTitulos = document.querySelector('#example1 thead');
+        const titulos = Object.keys(data[0]);
         const row = document.createElement('tr');
         titulos.forEach(titulo => {
             const th = document.createElement('th');
             th.textContent = titulo.toUpperCase().replace('_', ' '); // Añadir el título como texto del th, y convertir el texto en mayúsculas
             row.appendChild(th);
         });
-        tablaEmpleado.appendChild(row);
+        tablaTitulos.appendChild(row);
 
         // Agregar las filas de datos
         const tablaCuerpo = document.querySelector('#example1 tbody');
@@ -21,10 +20,64 @@ fetch('/track')
                 td.textContent = element[titulo];
                 fila.appendChild(td);
             });
+
+            // Añadir botones de editar y eliminar en la nueva columna
+            const acciones = document.createElement('td');
+
+            // Botón de editar
+            const botonEditar = document.createElement('button');
+            botonEditar.innerHTML = '<i class="fas fa-edit"></i>';
+            botonEditar.addEventListener('click', function() {
+                // Obtener los datos de la fila actual
+                const data = Array.from(fila.children).map(td => td.textContent);
+
+                // Llenar el modal de edición con los datos de la fila actual
+                document.getElementById('edit_id').value = data[0];
+                document.getElementById('edit_name').value = data[1]; 
+                document.getElementById('edit_album').value = data[2]; 
+                document.getElementById('edit_media').value = data[3]; 
+                document.getElementById('edit_genre').value = data[4]; 
+                document.getElementById('edit_composer').value = data[5]; 
+                document.getElementById('edit_milliseconds').value = data[7]; 
+                document.getElementById('edit_byte').value = data[8]; 
+                document.getElementById('edit_unite_price').value = data[6]; 
+
+                // Mostrar el modal de edición
+                $('#editModal').modal('show');
+            });
+            acciones.appendChild(botonEditar);
+
+            // Botón de eliminar
+            const botonEliminar = document.createElement('button');
+            botonEliminar.innerHTML = '<i class="fas fa-trash"></i>';
+            botonEliminar.addEventListener('click', function() {
+                // Obtener los datos de la fila actual
+                const data = Array.from(fila.children).map(td => td.textContent);
+
+                // Llenar el modal de edición con los datos de la fila actual
+                document.getElementById('delete_id').value = data[0];
+                document.getElementById('delete_name').value = data[1]; 
+                document.getElementById('delete_album').value = data[2]; 
+                document.getElementById('delete_media').value = data[3]; 
+                document.getElementById('delete_genre').value = data[4]; 
+                document.getElementById('delete_composer').value = data[5]; 
+                document.getElementById('delete_milliseconds').value = data[7]; 
+                document.getElementById('delete_byte').value = data[8]; 
+                document.getElementById('delete_unite_price').value = data[6]; 
+
+                // Mostrar el modal de edición
+                $('#deleteModal').modal('show');
+            });
+            acciones.appendChild(botonEliminar);
+
+            fila.appendChild(acciones);
             tablaCuerpo.appendChild(fila);
         });
     })
     .catch(error => console.error('Error encontrar las bandas:', error));
+
+
+
 
 fetch('/album')
     .then(response => response.json())
@@ -155,4 +208,59 @@ function searchData() {
             console.error('Error:', error);
             alert("Error fetching data. Please try again.");
         });
+}
+
+// ------------------------------------------------------------Delete------------------------------------------------------------
+
+function DeleteTrack() {
+    const id = document.getElementById('delete_id').value;
+    const name = document.getElementById('delete_name').value;
+    const album = document.getElementById('delete_album').value;
+    const media = document.getElementById('delete_media').value;
+    const genre = document.getElementById('delete_genre').value;
+    const composer = document.getElementById('delete_composer').value;
+    const milliseconds = document.getElementById('delete_milliseconds').value;
+    const byte = document.getElementById('delete_byte').value;
+    const unite_price = document.getElementById('delete_unite_price').value;
+
+    const data = {
+        id,
+        name,
+        album,
+        media,
+        genre,
+        composer,
+        milliseconds,
+        byte,
+        unite_price
+    };
+
+    fetch('/track/{$id}', {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(data),
+    }) 
+
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.message != undefined) {
+            console.log('Success:', data);
+            alert('The track has been deleted successfully');
+        } else {
+            console.error('Error:', data.error);
+            alert("The track could not be deleted");
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("Error deleting track. Please try again.");
+    });
+
 }
