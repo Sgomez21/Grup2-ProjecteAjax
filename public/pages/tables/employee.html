@@ -131,6 +131,18 @@
       padding-top: 5px;
       padding-bottom: 5px;
     }
+
+    #loadingIndicator {
+      position: fixed;
+      top: 50%;
+      left: 56%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      border-radius: 5px;
+      margin-top: 4%;
+      display: flex;
+      justify-content: center
+    }
   </style>
 </head>
 
@@ -286,6 +298,9 @@
         </div><!-- /.container-fluid -->
       </section>
 
+      <!--Mensaje de carga-->
+
+
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
@@ -297,6 +312,9 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+                  <div id="loadingIndicator" style="display: none;">
+                    <img src="../../dist/img/loading.gif" width="80%">
+                  </div>
                   <button id="button_add" type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i>
                     Add
                     employee</button>
@@ -306,7 +324,6 @@
                       <thead>
                       </thead>
                       <tbody>
-
                       </tbody>
                     </table>
                     <!-- Modal -->
