@@ -119,7 +119,7 @@ app.put('/employee/:id', async function (req, res) {
 app.get('/track', async function (req, res) {
     try {
         let db = await getDbConnection();
-        const query = await db.query("SELECT track.track_id, track.name, album.title as album, media_type.name as media, genre.name as genre, track.composer, track.milliseconds, track.bytes, track.unit_price FROM track INNER JOIN album ON track.album_id = album.album_id INNER JOIN media_type ON track.media_type_id = media_type.media_type_id INNER JOIN genre ON track.genre_id = genre.genre_id;");
+        const query = await db.query("SELECT track.track_id, track.name, album.title as album, media_type.name as media, genre.name as genre, track.composer, track.unit_price FROM track INNER JOIN album ON track.album_id = album.album_id INNER JOIN media_type ON track.media_type_id = media_type.media_type_id INNER JOIN genre ON track.genre_id = genre.genre_id;");
         res.json(query.rows);
         await db.end();
     } catch (error) {
@@ -128,6 +128,18 @@ app.get('/track', async function (req, res) {
     }
 });
 
+//Bytes y Millisecons
+app.get('/Track', async function (req, res) {
+    try {
+        let db = await getDbConnection();
+        const query = await db.query("SELECT track.milliseconds, track.bytes FROM track");
+        res.json(query.rows);
+        await db.end();
+    } catch (error) {
+        console.error('Error fetching track:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 //ADD
 app.post("/track", async function (req, res) {

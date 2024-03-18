@@ -23,7 +23,7 @@ fetch('/track')
 
             // Añadir botones de editar y eliminar en la nueva columna
             const acciones = document.createElement('td');
-
+// ------------------------------------------------------------Editar------------------------------------------------------------
             // Botón de editar
             const botonEditar = document.createElement('button');
             botonEditar.innerHTML = '<i class="fas fa-edit"></i>';
@@ -38,15 +38,14 @@ fetch('/track')
                 document.getElementById('edit_media').value = data[3]; 
                 document.getElementById('edit_genre').value = data[4]; 
                 document.getElementById('edit_composer').value = data[5]; 
-                document.getElementById('edit_milliseconds').value = data[7]; 
-                document.getElementById('edit_byte').value = data[8]; 
+                searchData(data[0]);
                 document.getElementById('edit_unite_price').value = data[6]; 
 
                 // Mostrar el modal de edición
                 $('#editModal').modal('show');
             });
             acciones.appendChild(botonEditar);
-
+// ------------------------------------------------------------Eliminar------------------------------------------------------------
             // Botón de eliminar
             const botonEliminar = document.createElement('button');
             botonEliminar.innerHTML = '<i class="fas fa-trash"></i>';
@@ -61,8 +60,7 @@ fetch('/track')
                 document.getElementById('delete_media').value = data[3]; 
                 document.getElementById('delete_genre').value = data[4]; 
                 document.getElementById('delete_composer').value = data[5]; 
-                document.getElementById('delete_milliseconds').value = data[7]; 
-                document.getElementById('delete_byte').value = data[8]; 
+                searchDataForDelete(data[0]);
                 document.getElementById('delete_unite_price').value = data[6]; 
 
                 // Mostrar el modal de edición
@@ -165,21 +163,10 @@ function saveTrack() {
             }
         })
 }
-// ------------------------------------------------------------Editar------------------------------------------------------------
+// ------------------------------------------------------------Datos Millisecons y Bytes------------------------------------------------------------
 
-document.getElementById('button_edit').addEventListener('click', function () {
-    $('#editModal').modal('show');
-});
-
-function searchData() {
-    let track_id = document.getElementById('trackIdInput').value.trim();
-
-    if (track_id === "") {
-        alert('Please insert an ID');
-        return;
-    }
-
-    fetch(`/track/${track_id}`)
+function searchData(trackId) {
+    fetch(`/track/${trackId}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -189,19 +176,29 @@ function searchData() {
         .then(data => {
             if (data.length > 0) {
                 // Actualizar los valores en el modal con los datos del track
-                document.getElementById('edit_name').value = data[0].name;
-                document.getElementById('edit_album').value = data[0].album;
-                document.getElementById('edit_media').value = data[0].media;
-                document.getElementById('edit_genre').value = data[0].genre;
-                document.getElementById('edit_composer').value = data[0].composer;
                 document.getElementById('edit_milliseconds').value = data[0].milliseconds;
                 document.getElementById('edit_byte').value = data[0].bytes;
-                document.getElementById('edit_unite_price').value = data[0].unit_price;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Error fetching data. Please try again.");
+        });
+}
 
-                // Muestra el modal después de cargar los datos
-                $('#editModal').modal('show');
-            } else {
-                alert('No data found for the provided ID.');
+function searchDataForDelete(trackId) {
+    fetch(`/track/${trackId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.length > 0) {
+                // Actualizar los valores en el modal de eliminación con los datos del track
+                document.getElementById('delete_milliseconds').value = data[0].milliseconds;
+                document.getElementById('delete_byte').value = data[0].bytes;
             }
         })
         .catch(error => {
@@ -235,7 +232,7 @@ function DeleteTrack() {
         unite_price
     };
 
-    fetch('/track/{$id}', {
+    fetch('/track/${id}', {
         method: 'DELETE',
         headers: {
             'content-type': 'application/json'
