@@ -1,6 +1,8 @@
+document.getElementById('loadingIndicator').style.display = 'block';
 fetch('/track')
     .then(response => response.json())
     .then(data => {
+        document.getElementById('loadingIndicator').style.display = 'none';
         const tablaTitulos = document.querySelector('#example1 thead');
         const titulos = Object.keys(data[0]);
         const row = document.createElement('tr');
@@ -72,8 +74,10 @@ fetch('/track')
             tablaCuerpo.appendChild(fila);
         });
     })
-    .catch(error => console.error('Error encontrar las bandas:', error));
-
+    .catch(error => {
+        document.getElementById('loadingIndicator').style.display = 'none';
+        console.error('Error fetching track:', error);
+    });
 
 
 

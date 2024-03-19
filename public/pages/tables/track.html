@@ -42,6 +42,18 @@
     .tamano_input {
       width: 81%;
     }
+
+    #loadingIndicator {
+      position: fixed;
+      top: 50%;
+      left: 56%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      border-radius: 5px;
+      margin-top: 4%;
+      display: flex;
+      justify-content: center
+    }
   </style>
 </head>
 
@@ -208,8 +220,16 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body" style="overflow: scroll;">
+                  <div id="loadingIndicator" style="display: none;">
+                    <img src="../../dist/img/loading.gif" width="80%">
+                  </div>
                   <button id="button_add" type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i>
                     Add Track</button>
+                  <button id="button_edit" type="button" class="btn btn-primary float-right"><i class="fas fa-edit"></i>
+                    Edit Track</button>
+                  <button id="button_delete" type="button" class="btn btn-primary float-right"><i
+                      class="fas fa-trash"></i> Delete Track</button>
+
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     </thead>

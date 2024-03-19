@@ -25,7 +25,7 @@ app.get('/employee', async function (req, res) {
         res.json(query.rows);
         await db.end();
     } catch (error) {
-        console.error('Errorr fetching employees:', error);
+        console.error('Error fetching employees:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });

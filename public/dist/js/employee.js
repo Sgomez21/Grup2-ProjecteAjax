@@ -1,6 +1,8 @@
+document.getElementById('loadingIndicator').style.display = 'block';
 fetch('/employee')
     .then(response => response.json())
     .then(data => {
+        document.getElementById('loadingIndicator').style.display = 'none';
         const tablaEmpleado = document.querySelector('#example1 thead');
         const titulos = Object.keys(data[0]); // Obtener los nombres de las propiedades del primer elemento del array
 
@@ -71,7 +73,7 @@ fetch('/employee')
                         })
                         .catch(error => {
                             console.error('Error:', error);
-                            alert('Hubo un problema al intentar eliminar los datos.');
+                            alert('Hubo un problema al intentar eliminar los datos, debes borrar sus empleados antes.');
                         });
                 }
             });
@@ -90,7 +92,10 @@ fetch('/employee')
             selectReportsTo.appendChild(option);
         });
     })
-    .catch(error => console.error('Error encontrar empleados:', error));
+    .catch(error => {
+        document.getElementById('loadingIndicator').style.display = 'none';
+        console.error('Error fetching employees:', error);
+    });
 
 document.getElementById('button_add').addEventListener('click', function () {
     $('#employeeModal').modal('show');
