@@ -4,12 +4,12 @@ fetch('/employee')
     .then(data => {
         document.getElementById('loadingIndicator').style.display = 'none';
         const tablaEmpleado = document.querySelector('#example1 thead');
-        const titulos = Object.keys(data[0]); // Obtener los nombres de las propiedades del primer elemento del array
+        const titulos = Object.keys(data[0]);
 
         const row = document.createElement('tr');
         titulos.forEach(titulo => {
             const th = document.createElement('th');
-            th.textContent = titulo.toUpperCase().replace('_', ' '); // Añadir el título como texto del th, y convertir el texto en mayúsculas
+            th.textContent = titulo.toUpperCase().replace('_', ' '); 
             row.appendChild(th);
         });
         /*EDITAR*/
