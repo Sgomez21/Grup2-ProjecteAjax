@@ -156,10 +156,10 @@ function saveTrack() {
         .then(data => {
             if (data.message != undefined) {
                 console.log('Success:', data);
-                alert('The user has been added successfully');
+                alert('The track has been added successfully');
             } else {
                 console.error('Error:', data.error);
-                alert("The user could not be added");
+                alert("The track could not be added");
             }
         })
 }
@@ -207,6 +207,52 @@ function searchDataForDelete(trackId) {
         });
 }
 
+// ------------------------------------------------------------Editar------------------------------------------------------------
+
+function EditTrack() {
+    const id = document.getElementById('edit_id').value;
+    const name = document.getElementById('edit_name').value;
+    const album = document.getElementById('edit_album').value;
+    const media = document.getElementById('edit_media').value;
+    const genre = document.getElementById('edit_genre').value;
+    const composer = document.getElementById('edit_composer').value;
+    const milliseconds = document.getElementById('edit_milliseconds').value;
+    const byte = document.getElementById('edit_byte').value;
+    const unite_price = document.getElementById('edit_unite_price').value;
+
+    const data = {
+        id,
+        name,
+        album,
+        media,
+        genre,
+        composer,
+        milliseconds,
+        byte,
+        unite_price
+    };
+
+    fetch(`/track/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+
+    .then(response => response.json())
+        .then(data => {
+            console.log('Track updated:', data);
+            alert('Track updated successfully');
+        })
+        .catch(error => {
+            console.error('Error updating track:', error);
+            alert('Error updating track');
+        });
+    
+}
+
+
 // ------------------------------------------------------------Delete------------------------------------------------------------
 
 function DeleteTrack() {
@@ -232,7 +278,7 @@ function DeleteTrack() {
         unite_price
     };
 
-    fetch('/track/${id}', {
+    fetch(`/track/${id}`, {
         method: 'DELETE',
         headers: {
             'content-type': 'application/json'
