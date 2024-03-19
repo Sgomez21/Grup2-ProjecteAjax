@@ -129,10 +129,10 @@ app.get('/track', async function (req, res) {
 });
 
 //Bytes y Millisecons
-app.get('/Track', async function (req, res) {
+app.get('/track', async function (req, res) {
     try {
         let db = await getDbConnection();
-        const query = await db.query("SELECT track.milliseconds, track.bytes FROM track");
+        const query = await db.query("SELECT milliseconds, bytes FROM track");
         res.json(query.rows);
         await db.end();
     } catch (error) {
@@ -140,6 +140,7 @@ app.get('/Track', async function (req, res) {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
 
 //ADD
 app.post("/track", async function (req, res) {
@@ -168,11 +169,44 @@ app.post("/track", async function (req, res) {
 //EDIT
 app.get('/track/:track_id', async function (req, res) {
     let track_id = parseInt(req.params.track_id)
-    let db = await getDbConnection()
-    const query = await db.query('SELECT track.track_id, track.name, album.title as album, media_type.name as media, genre.name as genre, track.composer, track.milliseconds, track.bytes, track.unit_price FROM track INNER JOIN album ON track.album_id = album.album_id INNER JOIN media_type ON track.media_type_id = media_type.media_type_id INNER JOIN genre ON track.genre_id = genre.genre_id where track.track_id = $1;', [track_id])
-    res.json(query.rows)
-    await db.end()
+    try {
+        let db = await getDbConnection()
+        const {
+            name, 
+            album,
+            media,
+            genre,
+            composer,
+            milliseconds,
+            byte,
+            unite_price
+        } = req.body;
+        const query = await db.query('UPDATE track SET name = $1, album = (SELECT album_name FROM album WHERE album_id = (SELECT album_id FROM track WHERE track_id = $2)), media = $3, genre = $4, composer = $5, milliseconds = $6, bytes = $7, unit_price = $8 WHERE track_id = $9', [req.body.name, track_id, req.body.media, req.body.genre, req.body.composer, req.body.milliseconds, req.body.byte, req.body.unite_price, track_id]);
+
+        res.json(query.rows)
+        await db.end()
+
+    } catch (error) {
+        console.error('Error updating track:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+   
 })
+
+//DELETE
+app.delete('/track/:track_id', async function (req, res) {
+    let track_id = parseInt(req.params.track_id);
+    try {
+        let db = await getDbConnection();
+        const query = await db.query('DELETE FROM track WHERE track_id = $1', [track_id]);
+        res.json({ message: 'Track deleted successfully' });
+        await db.end();
+    } catch (error) {
+        console.error('Error deleting track:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 
 //Album
 app.get('/album', async function (req, res) {

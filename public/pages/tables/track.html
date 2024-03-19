@@ -275,7 +275,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary" onclick="saveTrack()">Save changes</button>
+                          <button type="button" class="btn btn-primary" onclick="saveTrack()">Save</button>
                         </div>
                       </div>
                     </div>
@@ -295,7 +295,7 @@
                         <div class="modal-body">
                           <form id="editTrackForm">
                             <label>Id</label><br>
-                            <input class="tamano_input" type="text" id="edit_id"><br>
+                            <input class="tamano_input" type="text" id="edit_id" disabled><br>
                             <label>Name</label><br>
                             <input class="tamano_input" type="text" id="edit_name"><br>
                             <label>Album</label><br>
@@ -315,7 +315,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary" onclick="saveTrack()">Save changes</button>
+                          <button type="button" class="btn btn-primary" onclick="EditTrack()">Save changes</button>
                         </div>
                       </div>
                     </div>
@@ -335,7 +335,7 @@
                         <div class="modal-body">
                           <form id="deleteTrackForm">
                             <label>Id</label><br>
-                            <input class="tamano_input" type="text" id="delete_id"><br>
+                            <input class="tamano_input" type="text" id="delete_id" disabled><br>
                             <label>Name</label><br>
                             <input class="tamano_input" type="text" id="delete_name"><br>
                             <label>Album</label><br>
